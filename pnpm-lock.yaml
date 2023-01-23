@@ -8,6 +8,7 @@ specifiers:
   '@types/react-dom': 18.0.10
   eslint: 8.32.0
   eslint-config-next: 13.1.4
+  keen-slider: ^6.8.5
   next: 13.1.4
   react: 18.2.0
   react-dom: 18.2.0
@@ -21,6 +22,7 @@ dependencies:
   '@types/react-dom': 18.0.10
   eslint: 8.32.0
   eslint-config-next: 13.1.4_7uibuqfxkfaozanbtbziikiqje
+  keen-slider: 6.8.5
   next: 13.1.4_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -1483,6 +1485,10 @@ packages:
     dependencies:
       array-includes: 3.1.6
       object.assign: 4.1.4
+    dev: false
+
+  /keen-slider/6.8.5:
+    resolution: {integrity: sha512-9yoosfffgTCrkmbX8kCUMWsn9KDgPSkxBof5/0yXde001D1xao7i9ppfxQCCK0MLnoCa+Rdssby0jFbTTUM4rw==}
     dev: false
 
   /language-subtag-registry/0.3.22:
