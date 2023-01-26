@@ -1,13 +1,17 @@
 import type { AppProps } from "next/app";
 
-import { Roboto_Flex } from "@next/font/google";
+import { Roboto } from "@next/font/google";
 import { globalStyles } from "../styles/global";
 
 import logoImg from "../assets/logo.svg";
 import Image from "next/image";
 import { Container, Header } from "../styles/pages/app";
 
-const robotoFlex = Roboto_Flex({ subsets: ["latin"] });
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  style: ["normal"],
+});
 
 globalStyles();
 
@@ -17,7 +21,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <style jsx global>
         {`
           html {
-            font-family: ${robotoFlex.style.fontFamily};
+            font-family: ${roboto.style.fontFamily};
           }
         `}
       </style>

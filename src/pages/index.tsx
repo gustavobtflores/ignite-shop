@@ -1,20 +1,22 @@
 import { useKeenSlider } from "keen-slider/react";
 import { GetStaticProps } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import Stripe from "stripe";
 
+import { formatCurrency } from "../helpers/formatCurrency";
 import { stripe } from "../lib/stripe";
 import { HomeContainer, Product } from "../styles/pages/home";
 
 import "keen-slider/keen-slider.min.css";
-import { formatCurrency } from "../helpers/formatCurrency";
+import Head from "next/head";
 
 interface HomeProps {
   products: {
     id: string;
     name: string;
     imageUrl: string;
-    price: number;
+    price: string;
   }[];
 }
 
@@ -27,26 +29,37 @@ export default function Home({ products }: HomeProps) {
   });
 
   return (
-    <HomeContainer ref={sliderRef} className="keen-slider">
-      {products.map((product) => {
-        return (
-          <Product className="keen-slider__slide" key={product.id}>
-            <Image
-              src={product.imageUrl}
-              width={520}
-              height={480}
-              alt={product.name}
-              quality={100}
-            />
+    <>
+      <Head>
+        <title>Home - Ignite Shop</title>
+      </Head>
+      <HomeContainer ref={sliderRef} className="keen-slider">
+        {products.map((product) => {
+          return (
+            <Link
+              key={product.id}
+              href={`/product/${product.id}`}
+              prefetch={false}
+            >
+              <Product className="keen-slider__slide">
+                <Image
+                  src={product.imageUrl}
+                  width={520}
+                  height={480}
+                  alt={product.name}
+                  quality={100}
+                />
 
-            <footer>
-              <strong>{product.name}</strong>
-              <span>{product.price}</span>
-            </footer>
-          </Product>
-        );
-      })}
-    </HomeContainer>
+                <footer>
+                  <strong>{product.name}</strong>
+                  <span>{product.price}</span>
+                </footer>
+              </Product>
+            </Link>
+          );
+        })}
+      </HomeContainer>
+    </>
   );
 }
 
@@ -62,7 +75,7 @@ export const getStaticProps: GetStaticProps = async () => {
       id: product.id,
       name: product.name,
       imageUrl: product.images[0],
-      price: formatCurrency(price.unit_amount / 100),
+      price: formatCurrency(price.unit_amount! / 100),
     };
   });
 
