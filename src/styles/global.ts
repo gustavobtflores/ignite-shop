@@ -20,4 +20,8 @@ export const globalStyles = globalCss({
   button: {
     cursor: "pointer",
   },
+
+  a: {
+    color: "inherit",
+  },
 });

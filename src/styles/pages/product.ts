@@ -7,7 +7,8 @@ export const ProductContainer = styled("div", {
   alignItems: "stretch",
 
   maxWidth: 1180,
-  margin: "0 auto",
+  margin: "auto",
+  padding: "0 1rem",
 });
 
 export const ImageContainer = styled("div", {
@@ -42,8 +43,13 @@ export const ProductDetails = styled("div", {
     fontSize: "$md",
     transition: "background-color 0.2s ease",
 
-    "&:hover": {
+    "&:not(:disabled):hover": {
       backgroundColor: "$green500",
+    },
+
+    "&:disabled": {
+      opacity: 0.6,
+      cursor: "not-allowed",
     },
   },
 

@@ -1,5 +1,6 @@
 import { useKeenSlider } from "keen-slider/react";
 import { GetStaticProps } from "next";
+import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import Stripe from "stripe";
@@ -9,7 +10,6 @@ import { stripe } from "../lib/stripe";
 import { HomeContainer, Product } from "../styles/pages/home";
 
 import "keen-slider/keen-slider.min.css";
-import Head from "next/head";
 
 interface HomeProps {
   products: {
@@ -23,8 +23,16 @@ interface HomeProps {
 export default function Home({ products }: HomeProps) {
   const [sliderRef] = useKeenSlider({
     slides: {
-      perView: 2,
+      perView: 2.5,
       spacing: 48,
+    },
+    breakpoints: {
+      "(max-width: 480px)": {
+        slides: {
+          perView: 1,
+          spacing: 16,
+        },
+      },
     },
   });
 
@@ -47,7 +55,7 @@ export default function Home({ products }: HomeProps) {
                   width={520}
                   height={480}
                   alt={product.name}
-                  quality={100}
+                  priority
                 />
 
                 <footer>

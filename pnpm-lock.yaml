@@ -4,6 +4,7 @@ specifiers:
   '@next/font': 13.1.4
   '@stitches/react': ^1.2.8
   '@types/node': 18.11.18
+  '@types/nprogress': ^0.2.0
   '@types/react': 18.0.27
   '@types/react-dom': 18.0.10
   axios: ^1.2.4
@@ -11,6 +12,7 @@ specifiers:
   eslint-config-next: 13.1.4
   keen-slider: ^6.8.5
   next: 13.1.4
+  nprogress: ^0.2.0
   react: 18.2.0
   react-dom: 18.2.0
   stripe: ^11.7.0
@@ -20,6 +22,7 @@ dependencies:
   '@next/font': 13.1.4
   '@stitches/react': 1.2.8_react@18.2.0
   '@types/node': 18.11.18
+  '@types/nprogress': 0.2.0
   '@types/react': 18.0.27
   '@types/react-dom': 18.0.10
   axios: 1.2.4
@@ -27,6 +30,7 @@ dependencies:
   eslint-config-next: 13.1.4_7uibuqfxkfaozanbtbziikiqje
   keen-slider: 6.8.5
   next: 13.1.4_biqbaboplfbrettd7655fr4n2y
+  nprogress: 0.2.0
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   stripe: 11.7.0
@@ -266,6 +270,10 @@ packages:
 
   /@types/node/18.11.18:
     resolution: {integrity: sha512-DHQpWGjyQKSHj3ebjFI/wRKcqQcdR+MoFBygntYOZytCqNfkd2ZC4ARDJ2DQqhjH5p85Nnd3jhUJIXrszFX/JA==}
+    dev: false
+
+  /@types/nprogress/0.2.0:
+    resolution: {integrity: sha512-1cYJrqq9GezNFPsWTZpFut/d4CjpZqA0vhqDUPFWYKF1oIyBz5qnoYMzR+0C/T96t3ebLAC1SSnwrVOm5/j74A==}
     dev: false
 
   /@types/prop-types/15.7.5:
@@ -1678,6 +1686,10 @@ packages:
     transitivePeerDependencies:
       - '@babel/core'
       - babel-plugin-macros
+    dev: false
+
+  /nprogress/0.2.0:
+    resolution: {integrity: sha512-I19aIingLgR1fmhftnbWWO3dXc0hSxqHQHQb3H8m+K3TnEn/iSeTZZOyvKXWqQESMwuUVnatlCnZdLBZZt2VSA==}
     dev: false
 
   /object-assign/4.1.1:
