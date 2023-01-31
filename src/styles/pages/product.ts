@@ -8,7 +8,6 @@ export const ProductContainer = styled("div", {
 
   maxWidth: 1180,
   margin: "auto",
-  padding: "0 1rem",
 });
 
 export const ImageContainer = styled("div", {

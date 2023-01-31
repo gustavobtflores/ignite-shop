@@ -5,10 +5,13 @@ export const globalStyles = globalCss({
     margin: 0,
     padding: 0,
     boxSizing: "border-box",
+    maxWidth: "100%",
   },
 
   body: {
     "-webkit-font-smoothing": "antialiased",
+    fontSmooth: "always",
+    textRendering: "optimizeLegibility",
     backgroundColor: "$gray900",
     color: "$gray100",
   },

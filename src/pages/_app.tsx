@@ -3,13 +3,12 @@ import type { AppProps } from "next/app";
 import { Roboto } from "@next/font/google";
 import { globalStyles } from "../styles/global";
 
-import logoImg from "../assets/logo.svg";
-import Image from "next/image";
-import { Container, Header } from "../styles/pages/app";
+import { Container } from "../styles/pages/app";
 import "@/src/lib/nprogress/nprogress.css";
-import Link from "next/link";
 import { useEffect } from "react";
 import NProgress from "nprogress";
+import { CartProvider } from "../hooks/useCart";
+import { Header } from "../components/Header";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -45,13 +44,10 @@ export default function App({ Component, pageProps, router }: AppProps) {
         `}
       </style>
       <Container>
-        <Header>
-          <Link href="/">
-            <Image src={logoImg} alt="" />
-          </Link>
-        </Header>
-
-        <Component {...pageProps} />
+        <CartProvider>
+          <Header />
+          <Component {...pageProps} />
+        </CartProvider>
       </Container>
     </>
   );

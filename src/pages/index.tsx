@@ -3,9 +3,11 @@ import { GetStaticProps } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import { Handbag } from "phosphor-react";
 import Stripe from "stripe";
 
 import { formatCurrency } from "../helpers/formatCurrency";
+import { useCart } from "../hooks/useCart";
 import { stripe } from "../lib/stripe";
 import { HomeContainer, Product } from "../styles/pages/home";
 
@@ -16,11 +18,24 @@ interface HomeProps {
     id: string;
     name: string;
     imageUrl: string;
-    price: string;
+    price: number;
+    priceFormatted: string;
+    defaultPriceId: string;
   }[];
 }
 
+interface Product {
+  id: string;
+  name: string;
+  imageUrl: string;
+  price: number;
+  priceFormatted: string;
+  defaultPriceId: string;
+}
+
 export default function Home({ products }: HomeProps) {
+  const { cart, addToCart } = useCart();
+
   const [sliderRef] = useKeenSlider({
     slides: {
       perView: 2.5,
@@ -35,6 +50,15 @@ export default function Home({ products }: HomeProps) {
       },
     },
   });
+
+  function handleAddToCart(
+    event: React.MouseEvent<HTMLButtonElement>,
+    product: Product
+  ) {
+    event.preventDefault();
+    event.stopPropagation();
+    addToCart(product);
+  }
 
   return (
     <>
@@ -59,8 +83,18 @@ export default function Home({ products }: HomeProps) {
                 />
 
                 <footer>
-                  <strong>{product.name}</strong>
-                  <span>{product.price}</span>
+                  <div>
+                    <strong>{product.name}</strong>
+                    <span>{product.priceFormatted}</span>
+                  </div>
+                  <button
+                    onClick={(event) => {
+                      handleAddToCart(event, product);
+                    }}
+                    disabled={cart.some((item) => item.id === product.id)}
+                  >
+                    <Handbag size={32} />
+                  </button>
                 </footer>
               </Product>
             </Link>
@@ -83,7 +117,10 @@ export const getStaticProps: GetStaticProps = async () => {
       id: product.id,
       name: product.name,
       imageUrl: product.images[0],
-      price: formatCurrency(price.unit_amount! / 100),
+      price: price.unit_amount,
+      priceFormatted: formatCurrency(price.unit_amount! / 100),
+      defaultPriceId: price.id,
+      description: product.description,
     };
   });
 

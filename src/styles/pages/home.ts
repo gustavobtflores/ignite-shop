@@ -7,6 +7,7 @@ export const HomeContainer = styled("main", {
   marginLeft: "auto",
   marginTop: "auto",
   marginBottom: "auto",
+  overflow: "visible !important",
 });
 
 export const Product = styled("div", {
@@ -32,10 +33,34 @@ export const Product = styled("div", {
     right: "0.25rem",
     padding: "2rem",
 
+    borderRadius: "6px",
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
-    borderRadius: "6px",
+
+    "> div": {
+      display: "flex",
+      flexDirection: "column",
+      gap: 4,
+    },
+
+    "> button": {
+      background: "$green300",
+      border: "none",
+      color: "$white",
+      borderRadius: 6,
+      padding: 12,
+      transition: "background 0.2s ease-in-out",
+
+      "&:not(:disabled):hover": {
+        background: "$green500",
+      },
+
+      "&:disabled": {
+        opacity: 0.6,
+        cursor: "not-allowed",
+      },
+    },
 
     backgroundColor: "rgba(0, 0, 0, 0.6)",
     transform: "translateY(110%)",
