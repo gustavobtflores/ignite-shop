@@ -1,4 +1,5 @@
 import { formatCurrency } from "@/src/helpers/formatCurrency";
+import { useCart } from "@/src/hooks/useCart";
 import { stripe } from "@/src/lib/stripe";
 import {
   ImageContainer,
@@ -6,10 +7,9 @@ import {
   ProductDetails,
 } from "@/src/styles/pages/product";
 import { GetStaticPaths, GetStaticProps } from "next";
+import Head from "next/head";
 import Image from "next/image";
 import Stripe from "stripe";
-import Head from "next/head";
-import { useCart } from "@/src/hooks/useCart";
 
 interface ProductProps {
   product: {
@@ -74,24 +74,30 @@ export const getStaticProps: GetStaticProps<any, { id: string }> = async ({
 }) => {
   const productId = params!.id;
 
-  const product = await stripe.products.retrieve(productId, {
-    expand: ["default_price"],
-  });
+  try {
+    const product = await stripe.products.retrieve(productId, {
+      expand: ["default_price"],
+    });
 
-  const price = product.default_price as Stripe.Price;
+    const price = product.default_price as Stripe.Price;
 
-  return {
-    props: {
-      product: {
-        id: product.id,
-        name: product.name,
-        imageUrl: product.images[0],
-        price: price.unit_amount,
-        priceFormatted: formatCurrency(price.unit_amount! / 100),
-        description: product.description,
-        defaultPriceId: price.id,
+    return {
+      props: {
+        product: {
+          id: product.id,
+          name: product.name,
+          imageUrl: product.images[0],
+          price: price.unit_amount,
+          priceFormatted: formatCurrency(price.unit_amount! / 100),
+          description: product.description,
+          defaultPriceId: price.id,
+        },
       },
-    },
-    revalidate: 60 * 60 * 1, // 1 hour
-  };
+      revalidate: 60 * 60 * 1, // 1 hour
+    };
+  } catch (error) {
+    return {
+      notFound: true,
+    };
+  }
 };
