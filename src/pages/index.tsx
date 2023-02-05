@@ -92,6 +92,7 @@ export default function Home({ products }: HomeProps) {
                       handleAddToCart(event, product);
                     }}
                     disabled={cart.some((item) => item.id === product.id)}
+                    aria-label="Adicionar ao carrinho"
                   >
                     <Handbag size={32} />
                   </button>

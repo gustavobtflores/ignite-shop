@@ -1,11 +1,7 @@
 import { formatCurrency } from "@/src/helpers/formatCurrency";
 import { useCart } from "@/src/hooks/useCart";
 import { stripe } from "@/src/lib/stripe";
-import {
-  ImageContainer,
-  ProductContainer,
-  ProductDetails,
-} from "@/src/styles/pages/product";
+import { ImageContainer, ProductContainer, ProductDetails } from "@/src/styles/pages/product";
 import { GetStaticPaths, GetStaticProps } from "next";
 import Head from "next/head";
 import Image from "next/image";
@@ -49,6 +45,7 @@ export default function Product({ product }: ProductProps) {
             onClick={() => {
               handleAddProductToCart(product.id);
             }}
+            aria-label="Adicionar ao carrinho"
           >
             Adicionar a sacola
           </button>
